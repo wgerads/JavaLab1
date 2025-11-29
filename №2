@@ -1,0 +1,89 @@
+    import java.util.Scanner;
+    
+    public class Segment {
+        private float x1, y1;   // начало
+        private float x2, y2;   // конец
+        
+        public Segment(float x1, float y1, float x2, float y2) {
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+        }
+        
+        public void init(float x1, float y1, float x2, float y2) {
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+        }
+        
+        public void read() {
+            Scanner sc = new Scanner(System.in);
+    
+            System.out.print("Введите x1: ");
+            this.x1 = sc.nextFloat();
+    
+            System.out.print("Введите y1: ");
+            this.y1 = sc.nextFloat();
+    
+            System.out.print("Введите x2: ");
+            this.x2 = sc.nextFloat();
+    
+            System.out.print("Введите y2: ");
+            this.y2 = sc.nextFloat();
+        }
+        
+        public void display() {
+            System.out.println("Отрезок: (" + getX1() + ", " + getY1() + ") -> (" + getX2() + ", " + getY2() + ")");
+        }
+    
+        public float getX1() {return x1;}
+    
+        public void setX1(float x1) {this.x1 = x1;}
+    
+        public float getX2() {return x2;}
+    
+        public float getY1() {return y1;}
+    
+        public float getY2() { return y2;}
+    
+    
+
+        public static Segment add(Segment a, Segment b) {
+            return new Segment(
+                    a.getX1(),
+                    a.getY1(),
+                    b.getX2(),
+                    b.getY2());
+        }
+        
+        public double length() {
+            return Math.sqrt((getX2() - getX1())*(getX2() - getX1()) + (getY2() - getY1())*(getY2() - getY1()));
+        }
+        
+        public static void main(String[] args) {
+            
+            Segment s1 = new Segment(0,0,0,0);
+            s1.init(1, 2, 3, 4);
+    
+            System.out.println("s1:");
+            s1.display();
+            System.out.println("Длина: " + s1.length());
+            
+            Segment s2 = new Segment(0,0,0,0);
+            System.out.println("\nВведите второй отрезок:");
+            s2.read();
+            // Сложение отрезков
+            Segment s3 = Segment.add(s1, s2);
+            System.out.println("\nРезультат сложения:");
+            s3.display();
+            
+            System.out.println("\nСтарый x1 в s1: " + s1.getX1());
+            s1.setX1(10);
+            System.out.println("Новый x1 в s1: " + s1.getX1());
+    
+    
+        }
+    }
+    

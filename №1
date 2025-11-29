@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Lab1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите длину массива n");
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        int[] arr = new int[n];
+        System.out.println("Введите элементы массива в одну строку через пробел");
+        for (int i = 0; i < n; i++) {
+            while (true) {
+                if (scanner.hasNextInt()) {
+                    arr[i] = scanner.nextInt();
+//                    System.out.println("Элемент № " + (i + 1) + " - " + arr[i]);
+                    break;
+                } else {
+                    System.out.println("В элементе №:" + (i + 1) + " Ошибка, попробуй снова");
+                    scanner.nextLine();
+                }
+            }
+        }
+
+        boolean[] check = new boolean[n];
+        int newLength = 0;
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (!check[j]) {
+                    if (arr[i] == arr[j]) {
+                        check[j] = true;
+                        count++;
+                    }
+                }
+            }
+            if (count >= 3) {
+                newLength += count;
+            }
+        }
+
+        int start = 0;
+        int[] arrTwo = new int[newLength];
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (arr[i] == arr[j]) {
+                    count++;
+                }
+            }
+            if (count >= 3) {
+                arrTwo[start] = arr[i];
+                start++;
+            }
+        }
+
+        System.out.println("Длина массива - " + newLength);
+        System.out.print("Конечный массив - ");
+        for (int i : arrTwo) {
+            System.out.print(i + " ");}}}
+
